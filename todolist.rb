@@ -6,32 +6,21 @@ class Todo
     @due_date=due_date
     @completed=completed
   end
+
   def overdue?
-    if @due_date < Date.today
-      true
-    else
-      false
-    end
+    Date.today > @due_date
   end
+
   def due_today?
-    if @due_date == Date.today
-      true
-    else
-      false
-    end
+     Date.today == @due_date
   end
+
   def due_later?
-    if @due_date > Date.today
-      true
-    else
-      false
-    end
+    Date.today < @due_date
   end
 
   def to_displayable_string
-    # FILL YOUR CODE HERE
     if @due_date != Date.today
-
       if @completed == true
         "[X] "+@text+" "+@due_date.to_s
       else
@@ -45,6 +34,7 @@ class Todo
       end
     end
   end
+
 end
 
 class TodosList
@@ -55,9 +45,11 @@ class TodosList
   def overdue
     TodosList.new(@todos.filter { |todo| todo.overdue? })
   end
+
   def due_today
     TodosList.new(@todos.filter { |todo| todo.due_today? })
   end
+
   def due_later
     TodosList.new(@todos.filter { |todo| todo.due_later? })
   end
@@ -66,7 +58,6 @@ class TodosList
     @todos.push(todo)
   end
   def to_displayable_list
-    # FILL YOUR CODE HERE
     @todos=@todos.map { |todo| todo.to_displayable_string }
   end
 end
